@@ -27,6 +27,15 @@ router.post('/api/drivers', (req, res) => {
     res.status(201).send(driver);
 })
 
+
+router.put('/api/drivers/:id', (req, res) => {
+    let { id } = req.params
+    const driver = drivers.find(driver => driver.id == id)
+    driver.team = req.body.team
+    res.send(driver)
+})
+
+
 router.delete('/api/drivers/:id', (req, res) => {
     const { id } = req.params
     let driver = drivers.find(driver => driver.id == id)
