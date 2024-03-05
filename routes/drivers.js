@@ -7,13 +7,11 @@ let drivers = [
 ];
 
 router.get('/api/drivers', (req, res) => {
-    res.json(drivers)
+    res.render('drivers', {drivers})
 })
 
-router.get('/api/drivers/:id', (req, res) => {
-    const { id } = req.params
-    let driver = drivers.find(driver => driver.id == id)
-    res.send(driver)
+router.get('/api/drivers/addDriver', (req, res) => {
+    res.render('addDriver')
 })
 
 router.post('/api/drivers', (req, res) => {
@@ -24,9 +22,14 @@ router.post('/api/drivers', (req, res) => {
         team: req.body.team,
     }
     drivers.push(driver)
-    res.status(201).send(driver);
+    res.render('drivers', {drivers})
 })
 
+router.get('/api/drivers/:id', (req, res) => {
+    const { id } = req.params
+    let driver = drivers.find(driver => driver.id == id)
+    res.render('driver', {driver})
+})
 
 router.put('/api/drivers/:id', (req, res) => {
     let { id } = req.params
